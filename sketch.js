@@ -5,8 +5,9 @@ var snapshot = [];
 //VAR TO CREATE BUTTONS
 var button;
 var button2;
+var button3;
 
-// let gif;
+let song;
 
 // VARIABLES FOR RANDOM IMAGE PICKER
 let cards = []; // CREATE AN EMPTY ARRAY TO STORE VARIABLES
@@ -23,6 +24,8 @@ function preload() {
     myPicContainer = loadImage("./assets/pic-container.png");
     myResultContainer = loadImage("./assets/result-container.png");
 
+    song = loadSound("./assets/yay.mp3");
+
     // gif = loadImage("./assets/gif-anim.gif");
     // the most efficient way to store images is by using a for loop and concatenation
     for (let i = 0; i < numCards; i++) {
@@ -38,13 +41,13 @@ function setup() {
     video = createCapture(VIDEO); //access live webcam 
 
     button = createImg('./assets/retry.svg');
-    button.position(width/4.3, height/1.4);
-    button.size(92, 85);
+    button.position(width/4.3, height/1.42);
+    button.size(100, 93);
     button.mousePressed(restartBin);
 
     button2 = createImg('./assets/save.svg');
-    button2.position(width/1.4, height/1.4);
-    button2.size(92, 85);
+    button2.position(width/1.4, height/1.42);
+    button2.size(100, 93);
     button2.mousePressed(saveFrame);
 
     button3 = createImg('./assets/snap.svg');
@@ -78,11 +81,22 @@ function takesnap() {
     print(snapshot);
 }
 
+function keyPressed() {
+    if (key === 'p') {
+        takesnap();
+        song.play();
+        stopRunningDraw = 0;
+        
+        setTimeout(function(){
+            noLoop();
+        }, 1000);
+    } 
+}
 
 
 function randomPicker() {
         takesnap();
-
+        song.play();
         stopRunningDraw = 0;
         
         setTimeout(function(){
